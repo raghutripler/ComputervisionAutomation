@@ -1,181 +1,455 @@
-//#include "opencv2/highgui/highgui.hpp"
-//#include "opencv2/core/core.hpp"
-//#include "opencv2/imgproc/imgproc.hpp"
-//#include <iostream>
-//
-//using namespace cv;
-//using namespace std;
-//
-//int main(int argc, const char** argv)
-//{
-//	Mat img = imread("Abdul_kalam.JPG", CV_LOAD_IMAGE_UNCHANGED); //read the image data in the file "MyPic.JPG" and store it in 'img'
-//
-//	if (img.empty()) //check whether the image is loaded or not
-//	{
-//		cout << "Error : Image cannot be loaded..!!" << endl;
-//		//system("pause"); //wait for a key press
-//		return -1;
-//	}
-//
-//	//cv::flip(img, img, 0);
-//	cv::circle(img, // destination image
-//		cv::Point(155, 110), // center coordinate
-//		65, // radius
-//		0, // color (here black)
-//		3); // thickness
-//
-//	cv::putText(img, // destination image
-//		"This is a dog.", // text
-//		cv::Point(40, 200), // text position
-//		cv::FONT_HERSHEY_PLAIN, // font type
-//		2.0, // font scale
-//		255, // text color (herewhite)
-//		2); // text thickness
-//
-//	namedWindow("MyWindow", CV_WINDOW_AUTOSIZE); //create a window with the name "MyWindow"
-//	imshow("MyWindow", img); //display the image which is stored in the 'img' in the "MyWindow" window
-//
-//	waitKey(0); //wait infinite time for a keypress
-//
-//	destroyWindow("MyWindow"); //destroy the window with the name, "MyWindow"
-//
-//	return 0;
-//}
+
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <iostream>
+#include <windows.h>
+#include <gdiplus.h>
+#include <memory>
+#include <vector>
+#include <string>
+#include <sstream>
+//#include <date.h>
+#include <iostream>
+#pragma comment (lib,"Gdiplus.lib")
+using namespace std;
+using namespace Gdiplus;
+
+INPUT ip;
+INPUT  shift;
+
+void press(SHORT ch);
+int Click(int x, int y);
+int Takescreenshot();
+bool ScreenCapture(int x, int y, int width, int height, char *filename);
+string sendkeys(string stringvalue);
+int ClickEnter();
+int ClickMenu();
+string FindObject(string  screenshot, string testimg);
+string clickObject(string Object);
+int CloseWindow();
+int ClickTab();
+int main() {
+	Sleep(6000);
+	clickObject("Template");
+
+	//clickObject("eclipse");
+	//Sleep(3000);
+	//clickObject("Run");
+	//Sleep(3000);
+
+	//clickObject("OK");
+	//Sleep(6000);
+	//clickObject("RunProgram");
+	//Sleep(5000);
+	//CloseWindow();
+	//Sleep(3000);
+	//ClickEnter();
+	//Sleep(3000);
+	//ClickMenu();
+	//sendkeys("Google chrome");
+	//ClickEnter();
+	//Sleep(4000);
+	//sendkeys("http://citrixnasa.mgd.mrshmc.com/Citrix/XenApp/auth/login.aspx");
+	//ClickEnter();
+	//Sleep(3000);
+	//sendkeys("vignesh-g");
+	//ClickTab();
+	//sendkeys("Cats@345");
+	//ClickEnter();
+	/*
+
+	clickObject("citrix");
+	Sleep(5000);
+	clickObject("TestDropdown");
+	Sleep(3000);
+	clickObject("AllOption");
+	Sleep(5000);
+	clickObject("YearDropDown");
+	Sleep(5000);
+	clickObject("2014Option");
+	Sleep(5000);
+	clickObject("2014USFSQA");
+	Sleep(5000);
+	clickObject("SelectButton");
+	Sleep(5000);
+	clickObject("Tools");
+	Sleep(5000);
+	clickObject("DataDictionaryObjects");
+	Sleep(6000);
+	clickObject("AuditSummary");
+	Sleep(5000);
+
+	*/
+
+	//using namespace date;
+	//using namespace std::chrono;
+	//std::cout << system_clock::now() << '\n';
+
+	//clickObject("calculator");
+	//Sleep(1500);
+	//clickObject("0");
+	//clickObject("1");
+	//clickObject("2");
+	//clickObject("3");
+	//clickObject("4");
+	//clickObject("5");
+	//clickObject("6");
+	//clickObject("7");
+	//clickObject("8");
+	//clickObject("9");
+	//clickObject("0");
+	//clickObject("1");
+	//clickObject("0");
+	//clickObject("1");
+	//clickObject("2");
+	//clickObject("3");
+	//clickObject("4");
+	//clickObject("dot");
 
 
 
-//#include <opencv2/core/core.hpp>
-//#include <opencv2/highgui/highgui.hpp>
-//#include "opencv2/imgproc/imgproc.hpp"
-//#include "Source.h"
-//using namespace cv;
-//
-//int main()
-//{
-//	// Create black empty images
-//	Mat image = Mat::zeros(400, 400, CV_8UC3);
-//
-//	// Draw a rectangle ( 5th argument is not -ve)
-//	rectangle(image, Point(15, 20), Point(70, 50), Scalar(0, 55, 255), +1, 4);
-//	imshow("Image1", image);
-//	// Draw a filled rectangle ( 5th argument is -ve)
-//	rectangle(image, Point(115, 120), Point(170, 150), Scalar(100, 155, 25), -1, 8);
-//	imshow("Image2", image);
-//
-//	waitKey(0);
-//	return(0);
-//}
-//
-//
-//#include "opencv2/highgui/highgui.hpp"
-//#include "opencv2/core/core.hpp"
-//#include "opencv2/imgproc/imgproc.hpp"
-//#include <iostream>
-//
-//using namespace cv;
-//using namespace std;
-//
-//int main(int argc, const char** argv)
-//{
-//	Mat img = imread("Abdul_kalam.JPG", CV_LOAD_IMAGE_UNCHANGED); //read the image data in the file "MyPic.JPG" and store it in 'img'
-//
-//	if (img.empty()) //check whether the image is loaded or not
-//	{
-//		cout << "Error : Image cannot be loaded..!!" << endl;
-//		//system("pause"); //wait for a key press
-//		return -1;
-//	}
-//
-//	//cv::flip(img, img, 0);
-//	cv::circle(img, // destination image
-//		cv::Point(155, 110), // center coordinate
-//		65, // radius
-//		0, // color (here black)
-//		3); // thickness
-//
-//	cv::putText(img, // destination image
-//		"This is a dog.", // text
-//		cv::Point(40, 200), // text position
-//		cv::FONT_HERSHEY_PLAIN, // font type
-//		2.0, // font scale
-//		255, // text color (herewhite)
-//		2); // text thickness
-//	void onMouse(int event, int x, int y, int flags, void*
-//		param)
-//	{cv::Mat *im = reinterpret_cast<cv::Mat*>(param);
-//		switch (event) { // dispatch the event
-//		case cv::EVENT_LBUTTONDOWN: // left mouse button down event
-//// display pixel value at (x,y)
-//			std::cout << "at (" << x << "," << y << ") value is:" << static_cast<int>(im->at<uchar>(cv::Point(x, y))) <<td::endl;
-//			break;
-//		}
-//	
-//	};
-//	namedWindow("MyWindow", CV_WINDOW_AUTOSIZE); //create a window with the name "MyWindow"
-//	imshow("MyWindow", img); //display the image which is stored in the 'img' in the "MyWindow" window
-//
-//	waitKey(0); //wait infinite time for a keypress
-//
-//	destroyWindow("MyWindow"); //destroy the window with the name, "MyWindow"
-//
-//	return 0;
-//}
+
+	//CloseWindow();
 
 
 
-//#include <iostream>
-//#include <opencv2/core.hpp>
-//#include <opencv2/highgui.hpp>
-//// test function that creates an image
-//cv::Mat function() {
-//	// create image
-//	cv::Mat ima(500, 500, CV_8U, 50);
-//	// return it
-//	return ima;
-//}
-//int main() {
-//	// create a new image made of 240 rows and 320 columns
-//	cv::Mat image1(240, 320, CV_8U, 100);
-//	cv::imshow("Image", image1); // show the image
-//	cv::waitKey(0); // wait for a key pressed
-//					// re-allocate a new image
-//	image1.create(200, 200, CV_8U);
-//	image1 = 200;
-//	cv::imshow("Image", image1); // show the image
-//	cv::waitKey(0); // wait for a key pressed
-//					// create a red color image
-//					// channel order is BGR
-//	cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));
-//	// or:
-//	// cv::Mat image2(cv::Size(320,240),CV_8UC3);
-//	// image2= cv::Scalar(0,0,255);
-//	cv::imshow("Image", image2); // show the image
-//	cv::waitKey(0); // wait for a key pressed
-//					// read an image
-//	cv::Mat image3 = cv::imread("Abdul_kalam.jpg");
-//	// all these images point to the same data block
-//	cv::Mat image4(image3);
-//	image1 = image3;
-//	// these images are new copies of the source image
-//	image3.copyTo(image2);
-//	cv::Mat image5 = image3.clone();
-//	// transform the image for testing
-//	cv::flip(image3, image3, 1);
-//	// check which images have been affected by the processing
-//		cv::imshow("Image 3", image3);
-//	cv::imshow("Image 1", image1);
-//	cv::imshow("Image 2", image2);
-//	cv::imshow("Image 4", image4);
-//	cv::imshow("Image 5", image5);
-//	cv::waitKey(0); // wait for a key pressed
-//					// get a gray-level image from a function
-//	cv::Mat gray = function();
-//	cv::imshow("Image", gray); // show the image
-//	cv::waitKey(0); // wait for a key pressed
-//					// read the image in gray scale
-//	image1 = cv::imread("Abdul_kalam.jpg", CV_LOAD_IMAGE_GRAYSCALE);
-//	image1.convertTo(image2, CV_32F, 1 / 255.0, 0.0);
-//	cv::imshow("Image", image2); // show the image
-//	cv::waitKey(0); // wait for a key pressed
-//	return 0;
-//}
+
+	return 0;
+}
+
+
+
+int ClickEnter() {
+
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	ip.ki.wVk = 0x0D;
+	ip.ki.dwFlags = 0;
+	SendInput(1, &ip, sizeof(INPUT));
+	ip.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &ip, sizeof(INPUT));
+
+	return 0;
+}
+
+int ClickTab() {
+
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	ip.ki.wVk = 0x09;
+	ip.ki.dwFlags = 0;
+	SendInput(1, &ip, sizeof(INPUT));
+	ip.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &ip, sizeof(INPUT));
+
+	return 0;
+}
+int CloseWindow() {
+
+	shift.type = INPUT_KEYBOARD;
+	shift.ki.wScan = 0; // hardware scan code for key
+	shift.ki.time = 0;
+	shift.ki.dwExtraInfo = 0;
+
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	shift.ki.wVk = 0x12;
+	shift.ki.dwFlags = 0;
+	SendInput(1, &shift, sizeof(INPUT));
+
+
+	ip.ki.wVk = 0x73;
+	ip.ki.dwFlags = 0;
+	SendInput(1, &ip, sizeof(INPUT));
+	ip.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &ip, sizeof(INPUT));
+
+
+
+	shift.ki.dwFlags = KEYEVENTF_KEYUP;
+	SendInput(1, &shift, sizeof(INPUT));
+
+	return 0;
+}
+
+
+string sendkeys(string stringvalue) {
+
+	int j;
+	Sleep(2000);
+	// Set up a generic keyboard event.
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+	//HOLD
+	shift.type = INPUT_KEYBOARD;
+	shift.ki.wScan = 0; // hardware scan code for key
+	shift.ki.time = 0;
+	shift.ki.dwExtraInfo = 0;
+
+	//hyndavi test+
+	string k = stringvalue;
+
+	for (int i = 0; i <= (k.length() - 1); i++)
+	{
+		//SHORT ret = VkKeyScan(TCHAR(k[i]));
+		WORD nVkCode = HIBYTE(VkKeyScanEx(k[i], GetKeyboardLayout(0)));
+		//hyndavi test end 
+		j = nVkCode;
+		switch (j)
+		{
+		case 0:
+			// Press the  key
+			ip.ki.wVk = VkKeyScan(TCHAR(k[i]));
+			ip.ki.dwFlags = 0; // 0 for key press
+			SendInput(1, &ip, sizeof(INPUT));
+
+			// Release the  key
+			ip.ki.wVk = VkKeyScan(TCHAR(k[i]));
+			ip.ki.dwFlags = KEYEVENTF_KEYUP;
+			SendInput(1, &ip, sizeof(INPUT));
+			break;
+
+		case 1:
+			shift.ki.wVk = VK_SHIFT;
+			shift.ki.dwFlags = 0;
+			SendInput(1, &shift, sizeof(INPUT));
+
+			ip.ki.wVk = VkKeyScan(TCHAR(k[i]));
+			ip.ki.dwFlags = 0;
+			SendInput(1, &ip, sizeof(INPUT));
+			ip.ki.dwFlags = KEYEVENTF_KEYUP;
+			SendInput(1, &ip, sizeof(INPUT));
+
+			shift.ki.dwFlags = KEYEVENTF_KEYUP;
+			SendInput(1, &shift, sizeof(INPUT));
+			break;
+		default:
+			break;
+		}
+	}
+
+	return "0";
+
+}
+
+string clickObject(string Object) {
+
+	Takescreenshot();
+
+	string objectCoordinates = FindObject("screen.jpg", Object + ".jpg");
+
+	vector<string> strings;
+	istringstream f(objectCoordinates);
+	string s;
+	while (getline(f, s, '*')) {
+		cout << s << endl;
+		strings.push_back(s);
+	}
+
+	int Xcoordinate = std::stoi(strings[0]);
+	int Ycoordinate = std::stoi(strings[1]);
+
+	Click(Xcoordinate, Ycoordinate);
+	return "0";
+}
+int ClickMenu() {
+
+
+	int driver = Click(32, 742);
+	return 0;
+}
+
+string FindObject(string  screenshot, string testimg) {
+
+	int x = 0;
+	int y = 0;
+	int Xcoordinates = 0;
+	int Ycoordinates = 0;
+	cv::Mat ref = cv::imread(screenshot);
+	cv::Mat tpl = cv::imread(testimg);
+	if (ref.empty() || tpl.empty())
+		return "-1";
+
+	cv::Mat gref, gtpl;
+	cv::cvtColor(ref, gref, CV_BGR2GRAY);
+	cv::cvtColor(tpl, gtpl, CV_BGR2GRAY);
+
+	cv::Mat res(ref.rows - tpl.rows + 1, ref.cols - tpl.cols + 1, CV_32FC1);
+	cv::matchTemplate(gref, gtpl, res, CV_TM_CCOEFF_NORMED);
+	cv::threshold(res, res, 0.8, 1., CV_THRESH_TOZERO);
+
+	while (true)
+	{
+		double minval, maxval, threshold = 0.8;
+		cv::Point minloc, maxloc;
+
+		cv::minMaxLoc(res, &minval, &maxval, &minloc, &maxloc);
+
+		if (maxval >= threshold)
+		{
+			cv::rectangle(
+				ref,
+				maxloc,
+				cv::Point(maxloc.x + tpl.cols, maxloc.y + tpl.rows),
+				CV_RGB(0, 255, 0), 2
+			);
+			cout << "Max +tpl-->X  : " << maxloc.x + tpl.cols << endl;
+			cout << "Max +tpl-->y : " << maxloc.y + tpl.rows << endl;
+			cout << " Max-->X: " << maxloc.x << endl;
+			cout << "Max-->y : " << maxloc.y << endl;
+			cout << "tpl-->X  : " << tpl.cols << endl;
+			cout << "tpl-->y : " << tpl.rows << endl;
+
+			Xcoordinates = (maxloc.x + tpl.cols + maxloc.x) / 2;
+			Ycoordinates = (maxloc.y + tpl.rows + maxloc.y) / 2;
+			cout << "***************Xcoordinates************" << Xcoordinates << endl;
+			cout << "***************Ycoordinates************" << Ycoordinates << endl;
+
+
+			cv::floodFill(res, maxloc, cv::Scalar(0),
+				0, cv::Scalar(.1), cv::Scalar(1.));
+		}
+		else
+			break;
+	}
+
+	int a = Xcoordinates;
+	stringstream ss;
+	ss << a;
+	string Xco = ss.str();
+
+	int b = Ycoordinates;
+	stringstream kk;
+	kk << b;
+	string Yco = kk.str();
+
+
+	string coordinates = Xco + "*" + Yco;
+
+	cv::imshow("reference", ref);
+
+	//cv::imwrite("rgb.jpg", ref);
+
+	cv::waitKey();
+
+	return coordinates;
+}
+
+
+
+int Click(int x, int y)
+{
+
+
+	double fScreenWidth = ::GetSystemMetrics(SM_CXSCREEN) - 1;
+	double fScreenHeight = ::GetSystemMetrics(SM_CYSCREEN) - 1;
+	double fx = x*(65535.0f / fScreenWidth);
+	double fy = y*(65535.0f / fScreenHeight);
+	INPUT  Input = { 0 };
+	Input.type = INPUT_MOUSE;
+	Input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
+	Input.mi.dx = fx;
+	Input.mi.dy = fy;
+	::SendInput(1, &Input, sizeof(INPUT));
+
+
+	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+	::SendInput(1, &Input, sizeof(INPUT));
+	// left up
+	::ZeroMemory(&Input, sizeof(INPUT));
+	Input.type = INPUT_MOUSE;
+	Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+	::SendInput(1, &Input, sizeof(INPUT));
+
+
+	return 0;
+}
+
+
+
+
+
+int Takescreenshot() {
+
+
+
+	GdiplusStartupInput gdiplusStartupInput;
+	ULONG_PTR gdiplusToken;
+	GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+	int x1 = 0;
+	int y1 = 0;
+	int x2 = GetSystemMetrics(SM_CXSCREEN);
+	int y2 = GetSystemMetrics(SM_CYSCREEN);
+	ScreenCapture(x1, y1, x2 - x1, y2 - y1, "screen.jpg");
+	//Shutdown GDI+
+	GdiplusShutdown(gdiplusToken);
+
+
+	return 0;
+}
+
+
+
+
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
+{
+	UINT num = 0; // number of image encoders
+	UINT size = 0; // size of the image encoder array in bytes
+	ImageCodecInfo* pImageCodecInfo = NULL;
+	GetImageEncodersSize(&num, &size);
+	if (size == 0)
+	{
+		return -1; // Failure
+	}
+	pImageCodecInfo = (ImageCodecInfo*)(malloc(size));
+	if (pImageCodecInfo == NULL)
+	{
+		return -1; // Failure
+	}
+	GetImageEncoders(num, size, pImageCodecInfo);
+	for (UINT j = 0; j < num; ++j)
+	{
+		if (wcscmp(pImageCodecInfo[j].MimeType, format) == 0)
+		{
+			*pClsid = pImageCodecInfo[j].Clsid;
+			free(pImageCodecInfo);
+			return j; // Success
+		}
+	}
+	free(pImageCodecInfo);
+	return -1; // Failure
+}
+void BitmapToJpg(HBITMAP hbmpImage, int width, int height)
+{
+	Bitmap *p_bmp = Bitmap::FromHBITMAP(hbmpImage, NULL);
+	//Bitmap *p_bmp = new Bitmap(width, height, PixelFormat32bppARGB);
+	CLSID pngClsid;
+	int result = GetEncoderClsid(L"image/jpeg", &pngClsid);
+	if (result != -1)
+		std::cout << "Encoder succeeded" << std::endl;
+	else
+		std::cout << "Encoder failed" << std::endl;
+	p_bmp->Save(L"screen.jpg", &pngClsid, NULL);
+	delete p_bmp;
+}
+bool ScreenCapture(int x, int y, int width, int height, char *filename)
+{
+	HDC hDc = CreateCompatibleDC(0);
+	HBITMAP hBmp = CreateCompatibleBitmap(GetDC(0), width, height);
+	SelectObject(hDc, hBmp);
+	BitBlt(hDc, 0, 0, width, height, GetDC(0), x, y, SRCCOPY);
+	BitmapToJpg(hBmp, width, height);
+	DeleteObject(hBmp);
+	return true;
+}
